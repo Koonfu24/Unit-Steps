@@ -766,7 +766,58 @@ Transform:
   m_GameObject: {fileID: 819172627}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.3395, y: -0.32967, z: 0}
+  m_LocalPosition: {x: -9.7, y: -2.91, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &968743895
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 968743897}
+  - component: {fileID: 968743896}
+  m_Layer: 0
+  m_Name: Color
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &968743896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968743895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7312f203a9ec3e54885197cde5991039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ColorManager
+  availableColors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  - {r: 1, g: 0, b: 1, a: 1}
+  - {r: 0, g: 1, b: 1, a: 1}
+--- !u!4 &968743897
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968743895}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.27085, y: -0.4896, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1247,6 +1298,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 866424896710039759, guid: 868fffde2882c9b4094ee7ae053d8f20, type: 3}
+      propertyPath: Ownership
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 866424896710039759, guid: 868fffde2882c9b4094ee7ae053d8f20, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1316006725
       objectReference: {fileID: 0}
@@ -1263,12 +1318,20 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7866972025827475450, guid: 868fffde2882c9b4094ee7ae053d8f20, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 19.91157
+      objectReference: {fileID: 0}
+    - target: {fileID: 7866972025827475450, guid: 868fffde2882c9b4094ee7ae053d8f20, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.8847041
+      objectReference: {fileID: 0}
+    - target: {fileID: 7866972025827475450, guid: 868fffde2882c9b4094ee7ae053d8f20, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.03
+      value: -0.0199
       objectReference: {fileID: 0}
     - target: {fileID: 7866972025827475450, guid: 868fffde2882c9b4094ee7ae053d8f20, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.78
+      value: -3.9779
       objectReference: {fileID: 0}
     - target: {fileID: 7866972025827475450, guid: 868fffde2882c9b4094ee7ae053d8f20, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1488,3 +1551,4 @@ SceneRoots:
   - {fileID: 813976858}
   - {fileID: 975316505}
   - {fileID: 1817853580}
+  - {fileID: 968743897}
