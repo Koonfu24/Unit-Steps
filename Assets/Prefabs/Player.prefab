@@ -187,7 +187,7 @@ MonoBehaviour:
   rb: {fileID: -3193815796459381034}
   bodyTransform: {fileID: 6396094804161050468}
   movementSpeed: 4
-  jumpForce: 10
+  jumpForce: 15
   groundCheck: {fileID: 7866972025827475450, guid: 868fffde2882c9b4094ee7ae053d8f20, type: 3}
   groundCheckRadius: 1
   groundLayer:
