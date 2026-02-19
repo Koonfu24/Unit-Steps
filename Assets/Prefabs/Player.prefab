@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 4228230645265109694}
   - component: {fileID: 3281401383441783904}
   - component: {fileID: 6432413145674773028}
-  - component: {fileID: 6300253705697675364}
   - component: {fileID: 3066729417953840416}
   - component: {fileID: -3193815796459381034}
   - component: {fileID: -435709446978165067}
   - component: {fileID: -7642797385108027058}
+  - component: {fileID: 4475153672088697923}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -170,29 +170,6 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!114 &6300253705697675364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1690636006613642819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28bbe04fbf67950409a50509d303e9ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
-  ShowTopMostFoldoutHeaderGroup: 1
-  inputReader: {fileID: 11400000, guid: be1edbaea444b7d4db2c3b3217c029f9, type: 2}
-  rb: {fileID: -3193815796459381034}
-  bodyTransform: {fileID: 6396094804161050468}
-  movementSpeed: 4
-  jumpForce: 15
-  groundCheck: {fileID: 7866972025827475450, guid: 868fffde2882c9b4094ee7ae053d8f20, type: 3}
-  groundCheckRadius: 1
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!61 &3066729417953840416
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -295,6 +272,29 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   virtualCamera: {fileID: 4330987021082239966}
   ownerPriority: 15
+--- !u!114 &4475153672088697923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690636006613642819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28bbe04fbf67950409a50509d303e9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
+  ShowTopMostFoldoutHeaderGroup: 1
+  inputReader: {fileID: 11400000, guid: be1edbaea444b7d4db2c3b3217c029f9, type: 2}
+  rb: {fileID: -3193815796459381034}
+  bodyTransform: {fileID: 6396094804161050468}
+  movementSpeed: 6
+  jumpForce: 15
+  groundCheck: {fileID: 6396094804161050468}
+  groundCheckRadius: 1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &6218982526491245080
 GameObject:
   m_ObjectHideFlags: 0

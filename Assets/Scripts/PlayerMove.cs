@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -16,15 +15,19 @@ public class PlayerMove : NetworkBehaviour
     [Header("Jump Settings")]
     [SerializeField] private float jumpForce = 7f;
     [SerializeField] private Transform groundCheck;
-    [SerializeField] private float groundCheckRadius = 0.2f;
+    [SerializeField] private float groundCheckRadius = 0.15f;
     [SerializeField] private LayerMask groundLayer;
 
     private Vector2 movementInput;
+
     private bool isGrounded;
+    private bool wasGrounded;
+    private bool jumpRequested;
+    private bool canJump;
 
     public override void OnNetworkSpawn()
     {
-        if (!IsOwner) { return; }
+        if (!IsOwner) return;
 
         inputReader.MoveEvent += HandleMove;
         inputReader.JumpEvent += HandleJump;
@@ -32,24 +35,16 @@ public class PlayerMove : NetworkBehaviour
 
     public override void OnNetworkDespawn()
     {
-        if (!IsOwner) { return; }
+        if (!IsOwner) return;
 
         inputReader.MoveEvent -= HandleMove;
         inputReader.JumpEvent -= HandleJump;
     }
-
+    
     private void Update()
     {
-        if (!IsOwner) { return; }
+        if (!IsOwner) return;
 
-        // เช็คว่าติดพื้นไหม
-        isGrounded = Physics2D.OverlapCircle(
-            groundCheck.position,
-            groundCheckRadius,
-            groundLayer
-        );
-
-        // หันหน้าตามทิศที่เดิน
         if (movementInput.x != 0)
         {
             bodyTransform.localScale = new Vector3(
@@ -62,36 +57,47 @@ public class PlayerMove : NetworkBehaviour
 
     private void FixedUpdate()
     {
-        if (!IsOwner) { return; }
+        if (!IsOwner) return;
 
+        // ตรวจพื้น
+        isGrounded = Physics2D.OverlapCircle(
+            groundCheck.position,
+            groundCheckRadius,
+            groundLayer
+        );
+
+        // เดิน
         rb.velocity = new Vector2(
             movementInput.x * movementSpeed,
             rb.velocity.y
         );
+
+        // กระโดด (กระโดดได้เมื่อแตะพื้น)
+        if (jumpRequested && isGrounded)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 0f);
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+
+        jumpRequested = false;
     }
 
     private void HandleMove(Vector2 input)
     {
-        // ใช้แค่แกน X (A / D)
         movementInput = new Vector2(input.x, 0f);
     }
 
     private void HandleJump()
     {
-        if (!isGrounded) { return; }
-
-        rb.velocity = new Vector2(rb.velocity.x, 0f);
-        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        jumpRequested = true;
     }
 
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
-        if (groundCheck == null) { return; }
-
+        if (groundCheck == null) return;
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
     }
 #endif
 }
-

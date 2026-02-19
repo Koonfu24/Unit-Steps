@@ -36,8 +36,10 @@ public class InputReader : ScriptableObject, IPlayerActions
     // Space
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (!context.performed) return;
-        JumpEvent?.Invoke();
+        if (context.phase == InputActionPhase.Started)
+        {
+            JumpEvent?.Invoke();
+        }
     }
 
     public void OnSprint(InputAction.CallbackContext context)
