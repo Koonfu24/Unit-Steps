@@ -21,7 +21,7 @@ public class HostGameManager
 
     private NetworkServer networkServer;
 
-    private const int MaxConnections = 20;
+    private const int MaxConnections = 4;
     private const string GameSceneName = "Game";
     private const string JoinCodeKey = "JoinCode";
     public async Task StartHostAsync()

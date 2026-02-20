@@ -1,48 +1,37 @@
 using UnityEngine;
 using Unity.Netcode;
+using TMPro;
 
 public class PlayerColor : NetworkBehaviour
 {
-    public SpriteRenderer sprite; 
+    public SpriteRenderer sprite;
+    public TextMeshProUGUI nameText;
 
-    private NetworkVariable<Color> playerColor =
-        new NetworkVariable<Color>(
-            Color.white,
-            NetworkVariableReadPermission.Everyone,
-            NetworkVariableWritePermission.Server
-        );
-
-    private void Awake()
-    {
-        if (sprite == null)
-            sprite = GetComponent<SpriteRenderer>();
-    }
+    private NetworkVariable<int> playerID = new NetworkVariable<int>();
 
     public override void OnNetworkSpawn()
     {
-        // ทุก client จะโดนเรียก
-        ApplyColor(playerColor.Value);
-
-        playerColor.OnValueChanged += (oldColor, newColor) =>
-        {
-            ApplyColor(newColor);
-        };
-
-        // ถ้าเป็น server ให้สุ่มสี
         if (IsServer)
         {
-            AssignUniqueColor();
+            playerID.Value = OwnerClientId < 4 ? (int)OwnerClientId : (int)(OwnerClientId % 4);
         }
+
+        UpdateVisual(playerID.Value);
+
+        playerID.OnValueChanged += (oldVal, newVal) =>
+        {
+            UpdateVisual(newVal);
+        };
     }
 
-    void ApplyColor(Color c)
+    void UpdateVisual(int id)
     {
-        sprite.color = c;
-    }
+        Color[] colors = { Color.blue, Color.red, Color.green, Color.yellow };
 
-    void AssignUniqueColor()
-    {
-        Color uniqueColor = ColorManager.Instance.GetUniqueColor();
-        playerColor.Value = uniqueColor;
+        id = id % colors.Length;
+
+        sprite.color = colors[id];
+        nameText.text = "P" + (id + 1);
+        nameText.color = colors[id];
     }
 }
