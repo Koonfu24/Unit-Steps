@@ -17,6 +17,7 @@ public class PlayerMove : NetworkBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckRadius = 0.15f;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     private Vector2 movementInput;
 
@@ -47,11 +48,7 @@ public class PlayerMove : NetworkBehaviour
 
         if (movementInput.x != 0)
         {
-            bodyTransform.localScale = new Vector3(
-                Mathf.Sign(movementInput.x),
-                1f,
-                1f
-            );
+            spriteRenderer.flipX = movementInput.x < 0;
         }
     }
 
