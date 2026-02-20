@@ -16,7 +16,8 @@ GameObject:
   - component: {fileID: -3193815796459381034}
   - component: {fileID: -7642797385108027058}
   - component: {fileID: 4475153672088697923}
-  m_Layer: 0
+  - component: {fileID: 3252620127010436743}
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,6 +283,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   spriteRenderer: {fileID: 4228230645265109694}
+--- !u!114 &3252620127010436743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690636006613642819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43a27a0bb9e7f5e49bcaf4fa5323ba5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Die
+  ShowTopMostFoldoutHeaderGroup: 1
 --- !u!1 &6218982526491245080
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,7 +307,7 @@ GameObject:
   - component: {fileID: 1972420729893655049}
   - component: {fileID: 4330987021082239966}
   - component: {fileID: 779687754305148093}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FollowCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -402,7 +416,7 @@ GameObject:
   - component: {fileID: 1738046694753432480}
   - component: {fileID: 3015055548479068610}
   - component: {fileID: 4790807100093205520}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -518,7 +532,7 @@ GameObject:
   - component: {fileID: 6319528219846696466}
   - component: {fileID: 3269077704868629691}
   - component: {fileID: 7020109540196275743}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
