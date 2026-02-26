@@ -56,12 +56,23 @@ public class PlayerMove : NetworkBehaviour
     {
         if (!IsOwner) return;
 
-        // ตรวจพื้น
-        isGrounded = Physics2D.OverlapCircle(
+        Collider2D[] hits = Physics2D.OverlapCircleAll(
             groundCheck.position,
             groundCheckRadius,
             groundLayer
         );
+
+        isGrounded = false;
+
+        foreach (var hit in hits)
+        {
+            // ถ้าไม่ใช่ collider ของตัวเอง
+            if (hit.gameObject != gameObject)
+            {
+                isGrounded = true;
+                break;
+            }
+        }
 
         // เดิน
         rb.velocity = new Vector2(
@@ -69,7 +80,7 @@ public class PlayerMove : NetworkBehaviour
             rb.velocity.y
         );
 
-        // กระโดด (กระโดดได้เมื่อแตะพื้น)
+        // กระโดด
         if (jumpRequested && isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, 0f);
