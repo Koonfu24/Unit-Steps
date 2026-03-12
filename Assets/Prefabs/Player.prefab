@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 3252620127010436743}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -275,7 +275,6 @@ MonoBehaviour:
   inputReader: {fileID: 11400000, guid: be1edbaea444b7d4db2c3b3217c029f9, type: 2}
   rb: {fileID: -3193815796459381034}
   bodyTransform: {fileID: 6396094804161050468}
-  spriteRenderer: {fileID: 4228230645265109694}
   movementSpeed: 6
   jumpForce: 15
   groundCheck: {fileID: 6396094804161050468}
@@ -283,6 +282,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 136
+  spriteRenderer: {fileID: 4228230645265109694}
 --- !u!114 &3252620127010436743
 MonoBehaviour:
   m_ObjectHideFlags: 0
