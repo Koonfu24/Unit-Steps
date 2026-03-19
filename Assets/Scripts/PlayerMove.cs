@@ -20,29 +20,25 @@ public class PlayerMove : NetworkBehaviour
 
     private Vector2 movementInput;
     private bool jumpRequested;
+
     private bool isGrounded;
 
     private Animator anim;
 
-    // =========================
-    // INIT
-    // =========================
     public override void OnNetworkSpawn()
     {
-        if (IsOwner)
-        {
-            inputReader.MoveEvent += HandleMove;
-            inputReader.JumpEvent += HandleJump;
-        }
+        if (!IsOwner) return;
+
+        inputReader.MoveEvent += HandleMove;
+        inputReader.JumpEvent += HandleJump;
     }
 
     public override void OnNetworkDespawn()
     {
-        if (IsOwner)
-        {
-            inputReader.MoveEvent -= HandleMove;
-            inputReader.JumpEvent -= HandleJump;
-        }
+        if (!IsOwner) return;
+
+        inputReader.MoveEvent -= HandleMove;
+        inputReader.JumpEvent -= HandleJump;
     }
 
     private void Awake()
@@ -50,14 +46,11 @@ public class PlayerMove : NetworkBehaviour
         anim = GetComponentInChildren<Animator>();
     }
 
-    // =========================
-    // UPDATE (OWNER ONLY)
-    // =========================
     private void Update()
     {
         if (!IsOwner) return;
 
-        // Flip + sync
+        // Flip sprite + ส่งไปให้ทุกคน
         if (movementInput.x != 0)
         {
             bool flip = movementInput.x < 0;
@@ -70,10 +63,11 @@ public class PlayerMove : NetworkBehaviour
 
     private void FixedUpdate()
     {
-        if (!IsOwner) return;
-
-        MoveServerRpc(movementInput, jumpRequested);
-        jumpRequested = false;
+        if (IsOwner)
+        {
+            MoveServerRpc(movementInput, jumpRequested);
+            jumpRequested = false;
+        }
     }
 
     // =========================
@@ -90,9 +84,9 @@ public class PlayerMove : NetworkBehaviour
     }
 
     // =========================
-    // SERVER MOVEMENT (สำคัญสุด)
+    // SERVER MOVEMENT
     // =========================
-    [ServerRpc(RequireOwnership = false)]
+    [ServerRpc]
     private void MoveServerRpc(Vector2 input, bool jump)
     {
         // เช็คพื้น
@@ -126,7 +120,7 @@ public class PlayerMove : NetworkBehaviour
     // =========================
     // FLIP SYNC
     // =========================
-    [ServerRpc(RequireOwnership = false)]
+    [ServerRpc]
     private void FlipServerRpc(bool flip)
     {
         FlipClientRpc(flip);
@@ -139,7 +133,7 @@ public class PlayerMove : NetworkBehaviour
     }
 
     // =========================
-    // GIZMOS
+    // DEBUG GIZMOS
     // =========================
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
