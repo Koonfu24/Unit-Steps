@@ -46,13 +46,14 @@ public class PlayerMove : NetworkBehaviour
     
     private void Update()
     {
+        Animation();
         if (!IsOwner) return;
 
         if (movementInput.x != 0)
         {
             spriteRenderer.flipX = movementInput.x < 0;
         }
-        Animation();
+        
     }
 
     private void FixedUpdate()
@@ -118,6 +119,7 @@ public class PlayerMove : NetworkBehaviour
     }
     private void Animation()
     {
+
         anim.SetFloat("isWalk", Mathf.Abs(rb.velocity.x));
 
     }
