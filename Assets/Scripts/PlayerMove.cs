@@ -1,6 +1,7 @@
 using System;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Android;
 
 public class PlayerMove : NetworkBehaviour
 {
@@ -25,7 +26,8 @@ public class PlayerMove : NetworkBehaviour
     private bool wasGrounded;
     private bool jumpRequested;
     private bool canJump;
-
+    private Animator anim;
+    private Rigidbody2D rigid;
     public override void OnNetworkSpawn()
     {
         if (!IsOwner) return;
@@ -50,6 +52,7 @@ public class PlayerMove : NetworkBehaviour
         {
             spriteRenderer.flipX = movementInput.x < 0;
         }
+        Animation();
     }
 
     private void FixedUpdate()
@@ -107,5 +110,17 @@ public class PlayerMove : NetworkBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
     }
+    private void Awake()
+    {
+        rigid = GetComponent<Rigidbody2D>();
+        anim = GetComponentInChildren<Animator>(); 
+      
+    }
+    private void Animation()
+    {
+        anim.SetFloat("isWalk", Mathf.Abs(rb.velocity.x));
+
+    }
+
 #endif
 }

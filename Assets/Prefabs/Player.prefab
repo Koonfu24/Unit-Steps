@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -7642797385108027058}
   - component: {fileID: 4475153672088697923}
   - component: {fileID: 3252620127010436743}
-  - component: {fileID: 4390100677876631596}
+  - component: {fileID: 4896051780545481607}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 320201835
+  GlobalObjectIdHash: 513595564
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -210,7 +210,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.32, y: 3.87}
+    oldSize: {x: 5.4, y: 4.8375}
     newSize: {x: 4.32, y: 3.87}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -297,7 +297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Die
   ShowTopMostFoldoutHeaderGroup: 1
---- !u!95 &4390100677876631596
+--- !u!95 &4896051780545481607
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
@@ -307,7 +307,7 @@ Animator:
   m_GameObject: {fileID: 1690636006613642819}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a3584836231b10343909cc8662ed2ba9, type: 2}
+  m_Controller: {fileID: 9100000, guid: 345d4b8b035216d46b1c8964d78d6327, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
