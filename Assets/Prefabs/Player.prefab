@@ -35,7 +35,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.37718505, y: 0.39795858, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1972420729893655049}
@@ -91,12 +91,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -8162825149728959895, guid: 37cb9fc4d60dde9438b75c246059857c, type: 3}
+  m_Sprite: {fileID: 80034288125517069, guid: f9f2e63dd60a0cc43b8606d8e4ac364c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 4.32, y: 3.87}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -206,17 +206,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.008981407}
+  m_Offset: {x: -0.013034821, y: 0.016354203}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.02, y: 2.03}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 4.32, y: 3.87}
+    newSize: {x: 4.32, y: 3.87}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 2.077775}
+  m_Size: {x: 4.5194483, y: 4.053953}
   m_EdgeRadius: 0
 --- !u!50 &-3193815796459381034
 Rigidbody2D:
@@ -578,7 +578,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -433.76013, y: -295.64}
+  m_AnchoredPosition: {x: -433.79, y: -294.26}
   m_SizeDelta: {x: 24.3611, y: 12.0999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3269077704868629691
@@ -636,8 +636,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1.21
-  m_fontSizeBase: 1.21
+  m_fontSize: 2.26
+  m_fontSizeBase: 2.26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
