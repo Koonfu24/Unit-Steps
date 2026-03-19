@@ -1,99 +1,84 @@
 using System;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.Android;
 
 public class PlayerMove : NetworkBehaviour
 {
     [Header("References")]
     [SerializeField] private InputReader inputReader;
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Transform bodyTransform;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     [Header("Movement Settings")]
     [SerializeField] private float movementSpeed = 6f;
 
     [Header("Jump Settings")]
     [SerializeField] private float jumpForce = 7f;
-    [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckRadius = 0.15f;
     [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private SpriteRenderer spriteRenderer;
 
     private Vector2 movementInput;
-
-    private bool isGrounded;
-    private bool wasGrounded;
     private bool jumpRequested;
-    private bool canJump;
+    private bool isGrounded;
+
     private Animator anim;
-    private Rigidbody2D rigid;
+
+    // =========================
+    // INIT
+    // =========================
     public override void OnNetworkSpawn()
     {
-        if (!IsOwner) return;
-
-        inputReader.MoveEvent += HandleMove;
-        inputReader.JumpEvent += HandleJump;
+        if (IsOwner)
+        {
+            inputReader.MoveEvent += HandleMove;
+            inputReader.JumpEvent += HandleJump;
+        }
     }
 
     public override void OnNetworkDespawn()
     {
-        if (!IsOwner) return;
-
-        inputReader.MoveEvent -= HandleMove;
-        inputReader.JumpEvent -= HandleJump;
+        if (IsOwner)
+        {
+            inputReader.MoveEvent -= HandleMove;
+            inputReader.JumpEvent -= HandleJump;
+        }
     }
-    
+
+    private void Awake()
+    {
+        anim = GetComponentInChildren<Animator>();
+    }
+
+    // =========================
+    // UPDATE (OWNER ONLY)
+    // =========================
     private void Update()
     {
-        Animation();
         if (!IsOwner) return;
 
+        // Flip + sync
         if (movementInput.x != 0)
         {
-            spriteRenderer.flipX = movementInput.x < 0;
+            bool flip = movementInput.x < 0;
+            FlipServerRpc(flip);
         }
-        
+
+        // Animation (NetworkAnimator จะ sync ให้เอง)
+        anim.SetFloat("isWalk", Mathf.Abs(movementInput.x));
     }
 
     private void FixedUpdate()
     {
         if (!IsOwner) return;
 
-        Collider2D[] hits = Physics2D.OverlapCircleAll(
-            groundCheck.position,
-            groundCheckRadius,
-            groundLayer
-        );
-
-        isGrounded = false;
-
-        foreach (var hit in hits)
-        {
-            // ถ้าไม่ใช่ collider ของตัวเอง
-            if (hit.gameObject != gameObject)
-            {
-                isGrounded = true;
-                break;
-            }
-        }
-
-        // เดิน
-        rb.velocity = new Vector2(
-            movementInput.x * movementSpeed,
-            rb.velocity.y
-        );
-
-        // กระโดด
-        if (jumpRequested && isGrounded)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, 0f);
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        }
-
+        MoveServerRpc(movementInput, jumpRequested);
         jumpRequested = false;
     }
 
+    // =========================
+    // INPUT
+    // =========================
     private void HandleMove(Vector2 input)
     {
         movementInput = new Vector2(input.x, 0f);
@@ -104,6 +89,58 @@ public class PlayerMove : NetworkBehaviour
         jumpRequested = true;
     }
 
+    // =========================
+    // SERVER MOVEMENT (สำคัญสุด)
+    // =========================
+    [ServerRpc(RequireOwnership = false)]
+    private void MoveServerRpc(Vector2 input, bool jump)
+    {
+        // เช็คพื้น
+        Collider2D[] hits = Physics2D.OverlapCircleAll(
+            groundCheck.position,
+            groundCheckRadius,
+            groundLayer
+        );
+
+        isGrounded = false;
+        foreach (var hit in hits)
+        {
+            if (hit.gameObject != gameObject)
+            {
+                isGrounded = true;
+                break;
+            }
+        }
+
+        // เดิน
+        rb.velocity = new Vector2(input.x * movementSpeed, rb.velocity.y);
+
+        // กระโดด
+        if (jump && isGrounded)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 0f);
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+    }
+
+    // =========================
+    // FLIP SYNC
+    // =========================
+    [ServerRpc(RequireOwnership = false)]
+    private void FlipServerRpc(bool flip)
+    {
+        FlipClientRpc(flip);
+    }
+
+    [ClientRpc]
+    private void FlipClientRpc(bool flip)
+    {
+        spriteRenderer.flipX = flip;
+    }
+
+    // =========================
+    // GIZMOS
+    // =========================
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
@@ -111,18 +148,5 @@ public class PlayerMove : NetworkBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
     }
-    private void Awake()
-    {
-        rigid = GetComponent<Rigidbody2D>();
-        anim = GetComponentInChildren<Animator>(); 
-      
-    }
-    private void Animation()
-    {
-
-        anim.SetFloat("isWalk", Mathf.Abs(rb.velocity.x));
-
-    }
-
 #endif
 }
