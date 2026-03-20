@@ -7,6 +7,7 @@ public class MultiButtonManager : NetworkBehaviour
     public int totalButtons = 4;
 
     private int currentPressed = 0;
+    private bool isDestroyed = false;
 
     public void PressButton()
     {
@@ -26,19 +27,23 @@ public class MultiButtonManager : NetworkBehaviour
 
     void CheckButtons()
     {
-        if (currentPressed >= totalButtons)
+        if (currentPressed >= totalButtons && !isDestroyed)
         {
-            SetBlockClientRpc(true);
-        }
-        else
-        {
-            SetBlockClientRpc(false);
+            DestroyBlock();
         }
     }
 
-    [ClientRpc]
-    void SetBlockClientRpc(bool state)
+    void DestroyBlock()
     {
-        hiddenBlock.SetActive(state);
+        isDestroyed = true;
+
+        if (hiddenBlock.TryGetComponent<NetworkObject>(out NetworkObject netObj))
+        {
+            netObj.Despawn(true); 
+        }
+        else
+        {
+            Destroy(hiddenBlock); 
+        }
     }
 }

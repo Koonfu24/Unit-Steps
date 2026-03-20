@@ -497,8 +497,9 @@ GameObject:
   - component: {fileID: 26857435}
   - component: {fileID: 26857434}
   - component: {fileID: 26857433}
+  - component: {fileID: 26857436}
   m_Layer: 3
-  m_Name: Win Place
+  m_Name: Wall win
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -618,12 +619,37 @@ Transform:
   m_GameObject: {fileID: 26857432}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 609.5808, y: 2.7618, z: 0}
-  m_LocalScale: {x: 11.130696, y: 11.741511, z: 1}
+  m_LocalPosition: {x: 66.9, y: 3.1987, z: 0}
+  m_LocalScale: {x: 6.398786, y: 12.638783, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &26857436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 26857432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 1452781651
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!1 &27522526
 GameObject:
   m_ObjectHideFlags: 0
@@ -921,7 +947,7 @@ Transform:
   m_GameObject: {fileID: 44045873}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 571.44, y: -2.5161, z: 0}
+  m_LocalPosition: {x: 45.3974, y: -2.5161, z: 0}
   m_LocalScale: {x: 1.453847, y: 0.98649454, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1390,7 +1416,7 @@ Transform:
   m_GameObject: {fileID: 113953998}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 575.91, y: -2.5161, z: 0}
+  m_LocalPosition: {x: 49.86737, y: -2.5161, z: 0}
   m_LocalScale: {x: 1.453847, y: 0.98649454, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5330,7 +5356,7 @@ Transform:
   m_GameObject: {fileID: 679420468}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 580.62, y: -2.5161, z: 0}
+  m_LocalPosition: {x: 54.577393, y: -2.5161, z: 0}
   m_LocalScale: {x: 1.453847, y: 0.98649454, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6136,7 +6162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MultiButtonManager
   ShowTopMostFoldoutHeaderGroup: 1
   hiddenBlock: {fileID: 26857432}
-  totalButtons: 4
+  totalButtons: 2
 --- !u!4 &760241687
 Transform:
   m_ObjectHideFlags: 0
@@ -6443,7 +6469,7 @@ GameObject:
   - component: {fileID: 794900824}
   - component: {fileID: 794900830}
   m_Layer: 3
-  m_Name: Block hit (2)
+  m_Name: Win
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6634,7 +6660,7 @@ Transform:
   m_GameObject: {fileID: 794900822}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.6, y: 0.53682995, z: 0}
+  m_LocalPosition: {x: 612.7, y: 0.53682995, z: 0}
   m_LocalScale: {x: 9.351851, y: 6.8015823, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6653,7 +6679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MultiPlayerFinish
   ShowTopMostFoldoutHeaderGroup: 1
-  requiredPlayers: 1
+  requiredPlayers: 2
 --- !u!1 &813976855
 GameObject:
   m_ObjectHideFlags: 0
@@ -12304,7 +12330,7 @@ Transform:
   m_GameObject: {fileID: 1393886445}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 585.65, y: -2.5161, z: 0}
+  m_LocalPosition: {x: 59.60742, y: -2.5161, z: 0}
   m_LocalScale: {x: 1.453847, y: 0.98649454, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

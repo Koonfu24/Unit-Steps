@@ -1,10 +1,14 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class ChangeSceneButton : MonoBehaviour
 {
-    public void GoToNextScene()
+    public void QuitGame()
     {
-        SceneManager.LoadScene("Name");
+        Application.Quit();
+
+        
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
     }
 }
