@@ -20,7 +20,7 @@ public class PlayerMove : NetworkBehaviour
 
     private Vector2 movementInput;
     private bool jumpRequested;
-
+    private Rigidbody2D rigid;
     private bool isGrounded;
 
     private Animator anim;
@@ -59,6 +59,7 @@ public class PlayerMove : NetworkBehaviour
 
         // Animation (NetworkAnimator จะ sync ให้เอง)
         anim.SetFloat("isWalk", Mathf.Abs(movementInput.x));
+        anim.SetBool("IsGrounds", isGrounded);
     }
 
     private void FixedUpdate()
