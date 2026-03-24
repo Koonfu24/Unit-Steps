@@ -20,25 +20,28 @@ public class PlayerMove : NetworkBehaviour
 
     private Vector2 movementInput;
     private bool jumpRequested;
-    private Rigidbody2D rigid;
-    private bool isGrounded;
 
     private Animator anim;
 
+    // ✅ Sync จาก Server → Client
+    private NetworkVariable<bool> netIsGrounded = new NetworkVariable<bool>();
+
     public override void OnNetworkSpawn()
     {
-        if (!IsOwner) return;
-
-        inputReader.MoveEvent += HandleMove;
-        inputReader.JumpEvent += HandleJump;
+        if (IsOwner)
+        {
+            inputReader.MoveEvent += HandleMove;
+            inputReader.JumpEvent += HandleJump;
+        }
     }
 
     public override void OnNetworkDespawn()
     {
-        if (!IsOwner) return;
-
-        inputReader.MoveEvent -= HandleMove;
-        inputReader.JumpEvent -= HandleJump;
+        if (IsOwner)
+        {
+            inputReader.MoveEvent -= HandleMove;
+            inputReader.JumpEvent -= HandleJump;
+        }
     }
 
     private void Awake()
@@ -48,18 +51,19 @@ public class PlayerMove : NetworkBehaviour
 
     private void Update()
     {
-        if (!IsOwner) return;
-
-        // Flip sprite + ส่งไปให้ทุกคน
-        if (movementInput.x != 0)
+        // ✅ Owner คุม input
+        if (IsOwner)
         {
-            bool flip = movementInput.x < 0;
-            FlipServerRpc(flip);
+            if (movementInput.x != 0)
+            {
+                bool flip = movementInput.x < 0;
+                FlipServerRpc(flip);
+            }
         }
 
-        // Animation (NetworkAnimator จะ sync ให้เอง)
+        // ✅ ทุก client ต้องอัปเดตอนิเมชั่น
         anim.SetFloat("isWalk", Mathf.Abs(movementInput.x));
-        anim.SetBool("IsGrounds", isGrounded);
+        anim.SetBool("IsGrounds", netIsGrounded.Value);
     }
 
     private void FixedUpdate()
@@ -90,28 +94,31 @@ public class PlayerMove : NetworkBehaviour
     [ServerRpc]
     private void MoveServerRpc(Vector2 input, bool jump)
     {
-        // เช็คพื้น
+        // เช็คพื้น (Server เท่านั้น)
         Collider2D[] hits = Physics2D.OverlapCircleAll(
             groundCheck.position,
             groundCheckRadius,
             groundLayer
         );
 
-        isGrounded = false;
+        bool grounded = false;
         foreach (var hit in hits)
         {
             if (hit.gameObject != gameObject)
             {
-                isGrounded = true;
+                grounded = true;
                 break;
             }
         }
+
+        // ✅ Sync ค่าไป client
+        netIsGrounded.Value = grounded;
 
         // เดิน
         rb.velocity = new Vector2(input.x * movementSpeed, rb.velocity.y);
 
         // กระโดด
-        if (jump && isGrounded)
+        if (jump && grounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, 0f);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -133,9 +140,6 @@ public class PlayerMove : NetworkBehaviour
         spriteRenderer.flipX = flip;
     }
 
-    // =========================
-    // DEBUG GIZMOS
-    // =========================
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
