@@ -23,8 +23,9 @@ public class PlayerMove : NetworkBehaviour
 
     private Animator anim;
 
-    // ✅ Sync จาก Server → Client
+    // ✅ Sync ค่าที่จำเป็น
     private NetworkVariable<bool> netIsGrounded = new NetworkVariable<bool>();
+    private NetworkVariable<float> netMoveX = new NetworkVariable<float>();
 
     public override void OnNetworkSpawn()
     {
@@ -51,7 +52,7 @@ public class PlayerMove : NetworkBehaviour
 
     private void Update()
     {
-        // ✅ Owner คุม input
+        // ✅ Owner คุม input + flip
         if (IsOwner)
         {
             if (movementInput.x != 0)
@@ -61,8 +62,8 @@ public class PlayerMove : NetworkBehaviour
             }
         }
 
-        // ✅ ทุก client ต้องอัปเดตอนิเมชั่น
-        anim.SetFloat("isWalk", Mathf.Abs(movementInput.x));
+        // ✅ ทุก client ใช้ค่าที่ sync
+        anim.SetFloat("isWalk", Mathf.Abs(netMoveX.Value));
         anim.SetBool("IsGrounds", netIsGrounded.Value);
     }
 
@@ -89,12 +90,15 @@ public class PlayerMove : NetworkBehaviour
     }
 
     // =========================
-    // SERVER MOVEMENT
+    // SERVER LOGIC
     // =========================
     [ServerRpc]
     private void MoveServerRpc(Vector2 input, bool jump)
     {
-        // เช็คพื้น (Server เท่านั้น)
+        // ✅ sync ค่าเดิน
+        netMoveX.Value = input.x;
+
+        // เช็คพื้น
         Collider2D[] hits = Physics2D.OverlapCircleAll(
             groundCheck.position,
             groundCheckRadius,
@@ -111,7 +115,7 @@ public class PlayerMove : NetworkBehaviour
             }
         }
 
-        // ✅ Sync ค่าไป client
+        // ✅ sync ground
         netIsGrounded.Value = grounded;
 
         // เดิน
@@ -126,7 +130,7 @@ public class PlayerMove : NetworkBehaviour
     }
 
     // =========================
-    // FLIP SYNC
+    // FLIP
     // =========================
     [ServerRpc]
     private void FlipServerRpc(bool flip)
