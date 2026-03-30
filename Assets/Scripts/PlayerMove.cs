@@ -18,12 +18,15 @@ public class PlayerMove : NetworkBehaviour
     [SerializeField] private float groundCheckRadius = 0.15f;
     [SerializeField] private LayerMask groundLayer;
 
+    [Header("Sound")] // 🔊 เพิ่มตรงนี้
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip jumpSound;
+
     private Vector2 movementInput;
     private bool jumpRequested;
 
     private Animator anim;
 
-    // ✅ Sync ค่าที่จำเป็น
     private NetworkVariable<bool> netIsGrounded = new NetworkVariable<bool>();
     private NetworkVariable<float> netMoveX = new NetworkVariable<float>();
 
@@ -52,7 +55,6 @@ public class PlayerMove : NetworkBehaviour
 
     private void Update()
     {
-        // ✅ Owner คุม input + flip
         if (IsOwner)
         {
             if (movementInput.x != 0)
@@ -62,7 +64,6 @@ public class PlayerMove : NetworkBehaviour
             }
         }
 
-        // ✅ ทุก client ใช้ค่าที่ sync
         anim.SetFloat("isWalk", Mathf.Abs(netMoveX.Value));
         anim.SetBool("IsGrounds", netIsGrounded.Value);
     }
@@ -76,9 +77,6 @@ public class PlayerMove : NetworkBehaviour
         }
     }
 
-    // =========================
-    // INPUT
-    // =========================
     private void HandleMove(Vector2 input)
     {
         movementInput = new Vector2(input.x, 0f);
@@ -95,10 +93,8 @@ public class PlayerMove : NetworkBehaviour
     [ServerRpc]
     private void MoveServerRpc(Vector2 input, bool jump)
     {
-        // ✅ sync ค่าเดิน
         netMoveX.Value = input.x;
 
-        // เช็คพื้น
         Collider2D[] hits = Physics2D.OverlapCircleAll(
             groundCheck.position,
             groundCheckRadius,
@@ -115,17 +111,28 @@ public class PlayerMove : NetworkBehaviour
             }
         }
 
-        // ✅ sync ground
         netIsGrounded.Value = grounded;
 
-        // เดิน
         rb.velocity = new Vector2(input.x * movementSpeed, rb.velocity.y);
 
-        // กระโดด
+        // 🔥 กระโดด + เสียง
         if (jump && grounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, 0f);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+
+            // 🔊 เล่นเสียงให้ทุก client
+            PlayJumpSoundClientRpc();
+        }
+    }
+
+    // 🔊 เพิ่มตรงนี้
+    [ClientRpc]
+    private void PlayJumpSoundClientRpc()
+    {
+        if (audioSource != null && jumpSound != null)
+        {
+            audioSource.PlayOneShot(jumpSound);
         }
     }
 

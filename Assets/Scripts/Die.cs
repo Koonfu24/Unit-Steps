@@ -5,6 +5,10 @@ public class Die : NetworkBehaviour
 {
     private static Vector3 spawnPosition;
 
+    [Header("Sound")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip dieSound;
+
     public override void OnNetworkSpawn()
     {
         if (IsServer)
@@ -19,7 +23,26 @@ public class Die : NetworkBehaviour
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Die"))
         {
+            // เรียกเสียง (ส่งไปทุก client)
+            PlayDieSoundServerRpc();
+
             RespawnAllPlayersServerRpc();
+        }
+    }
+
+    // 🔊 ส่งคำสั่งให้ทุก client เล่นเสียง
+    [ServerRpc(RequireOwnership = false)]
+    void PlayDieSoundServerRpc()
+    {
+        PlayDieSoundClientRpc();
+    }
+
+    [ClientRpc]
+    void PlayDieSoundClientRpc()
+    {
+        if (audioSource != null && dieSound != null)
+        {
+            audioSource.PlayOneShot(dieSound);
         }
     }
 

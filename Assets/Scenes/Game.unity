@@ -1549,6 +1549,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Die
   ShowTopMostFoldoutHeaderGroup: 1
+  audioSource: {fileID: 0}
+  dieSound: {fileID: 0}
 --- !u!114 &193224784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2580,6 +2582,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Die
   ShowTopMostFoldoutHeaderGroup: 1
+  audioSource: {fileID: 0}
+  dieSound: {fileID: 0}
 --- !u!1 &299850518
 GameObject:
   m_ObjectHideFlags: 0
@@ -3390,6 +3394,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Die
   ShowTopMostFoldoutHeaderGroup: 1
+  audioSource: {fileID: 0}
+  dieSound: {fileID: 0}
 --- !u!114 &446838880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3936,6 +3942,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Die
   ShowTopMostFoldoutHeaderGroup: 1
+  audioSource: {fileID: 0}
+  dieSound: {fileID: 0}
 --- !u!114 &528753393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8200,6 +8208,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Die
   ShowTopMostFoldoutHeaderGroup: 1
+  audioSource: {fileID: 0}
+  dieSound: {fileID: 0}
 --- !u!114 &1018614270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8563,6 +8573,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Die
   ShowTopMostFoldoutHeaderGroup: 1
+  audioSource: {fileID: 0}
+  dieSound: {fileID: 0}
 --- !u!114 &1023075381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8926,6 +8938,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Die
   ShowTopMostFoldoutHeaderGroup: 1
+  audioSource: {fileID: 0}
+  dieSound: {fileID: 0}
 --- !u!114 &1045337721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9427,6 +9441,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Die
   ShowTopMostFoldoutHeaderGroup: 1
+  audioSource: {fileID: 0}
+  dieSound: {fileID: 0}
 --- !u!114 &1124100286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9912,7 +9928,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1173994123
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11407,6 +11423,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Die
   ShowTopMostFoldoutHeaderGroup: 1
+  audioSource: {fileID: 0}
+  dieSound: {fileID: 0}
 --- !u!114 &1297941958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13463,6 +13481,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Die
   ShowTopMostFoldoutHeaderGroup: 1
+  audioSource: {fileID: 0}
+  dieSound: {fileID: 0}
 --- !u!114 &1573988541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14054,6 +14074,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Die
   ShowTopMostFoldoutHeaderGroup: 1
+  audioSource: {fileID: 0}
+  dieSound: {fileID: 0}
 --- !u!114 &1611027414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14537,7 +14559,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -15814,6 +15836,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController2D
   ShowTopMostFoldoutHeaderGroup: 1
+  audioSource: {fileID: 0}
+  dieSound: {fileID: 0}
 --- !u!114 &1800404170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16639,6 +16663,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Die
   ShowTopMostFoldoutHeaderGroup: 1
+  audioSource: {fileID: 0}
+  dieSound: {fileID: 0}
 --- !u!114 &1934354447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17209,6 +17235,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Die
   ShowTopMostFoldoutHeaderGroup: 1
+  audioSource: {fileID: 0}
+  dieSound: {fileID: 0}
 --- !u!1 &1952480983
 GameObject:
   m_ObjectHideFlags: 0
@@ -17817,6 +17845,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Die
   ShowTopMostFoldoutHeaderGroup: 1
+  audioSource: {fileID: 0}
+  dieSound: {fileID: 0}
 --- !u!1 &1996259761
 GameObject:
   m_ObjectHideFlags: 0
