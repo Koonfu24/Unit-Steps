@@ -6998,7 +6998,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MultiButtonManager
   ShowTopMostFoldoutHeaderGroup: 1
   hiddenBlock: {fileID: 26857432}
-  totalButtons: 2
+  totalButtons: 4
 --- !u!4 &760241687
 Transform:
   m_ObjectHideFlags: 0
