@@ -234,7 +234,7 @@ MonoBehaviour:
   rb: {fileID: -3193815796459381034}
   groundCheck: {fileID: 6396094804161050468}
   spriteRenderer: {fileID: 4228230645265109694}
-  movementSpeed: 6
+  movementSpeed: 8
   jumpForce: 15
   groundCheckRadius: 2
   groundLayer:
